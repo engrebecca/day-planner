@@ -8,9 +8,9 @@ $("#currentDay").text(moment().format('dddd, MMMM, Do'));
 function renderTimeBlocks(){
     const currentHour = moment().hour();
     for (let hour = startHour; hour <= endHour; hour++) {
-        const hourStr = (hour % 12 || 12) + (hour < 12 ? "AM" : "PM");
+        const hourStr = (hour % 12 || 12) + " " + (hour < 12 ? "AM" : "PM");
         const timeBlock = $(`<div class="row time-block">`);
-        const textArea = $(`<textarea class="col-10 description">`);
+        const textArea = $(`<textarea class="col-10 text-wrap description">`);
         if (hour < currentHour) {
             textArea.addClass("past");
         } else if (hour > currentHour) {
@@ -20,9 +20,9 @@ function renderTimeBlocks(){
         }
         textArea.val(localStorage.getItem(hour) || "");
         const saveBtn = $(
-            `<button class="col-1 saveBtn d-flex justify-content-center align-items-center">
+            `<div class="col-1 d-flex justify-content-center align-items-center saveBtn">
                 <i class="far fa-save"></i>
-            </button>`
+            </div>`
         );
         saveBtn.on("click", function(event) {
             event.preventDefault();
