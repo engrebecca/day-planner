@@ -1,37 +1,41 @@
+const startHour = 9;
+const endHour = 17;
+
 // Displays current date at top of planner
-$("#currentDay").text(moment().format('dddd, MMMM, Do'))
+$("#currentDay").text(moment().format('dddd, MMMM, Do'));
 
 // Check current time and set timeblock colors
-function setPage(){
-    var timeArr = [9,10,11,12,13,14,15,16,17];
-    for (var i = 0; i < timeArr.length; i++){
-    // if timeArr[i] < current time rounded down (HH), then set respective #id.attr("class", "past")
-    // else if timeArr[i] === current time rounded down (HH), then set respective #id.attr("class", "present")
-    // else if timeArr set respective #id.attr("class", "future")
+function renderTimeBlocks(){
+    const currentHour = moment().hour();
+    for (let hour = startHour; hour <= endHour; hour++) {
+        const hourStr = (hour % 12 || 12) + (hour < 12 ? "AM" : "PM");
+        const timeBlock = $(`<div class="row time-block">`);
+        const textArea = $(`<textarea class="col-10 description">`);
+        if (hour < currentHour) {
+            textArea.addClass("past");
+        } else if (hour > currentHour) {
+            textArea.addClass("future");
+        } else {
+            textArea.addClass("present");
+        }
+        textArea.val(localStorage.getItem(hour) || "");
+        const saveBtn = $(
+            `<button class="col-1 saveBtn d-flex justify-content-center align-items-center">
+                <i class="far fa-save"></i>
+            </button>`
+        );
+        saveBtn.on("click", function(event) {
+            event.preventDefault();
+            localStorage.setItem(hour, textArea.val());
+        });
+
+        timeBlock.append(
+            `<span class="col-1 hour">${hourStr}</span>`,
+            textArea,
+            saveBtn
+        )
+        $("#time-blocks").append(timeBlock);
     }
-
-    // get object from local storage and JSON parse
-    var newArr = [9,10,11,12,13,14,15,16,17]
-    for (var i = 0; i < timeArr.length; i++)
-    // Access key of object
-    eventOb[i + "AM"]
 }
-// console.log(moment().format("HH"));
-// setPage();
 
-// When timeblock clicked, an event/appt can be entered
-// $(".eventblock").on("click", function(){
-//     console.log("Eventblock clicked");
-// })
-
-var eventOb = {};
-// When save button clicked, saves event text to local storage
-$(".saveBtn").on("click", function(){
-    var eventTime = $(this).prev().prev().html();
-    console.log(eventTime);
-    eventOb[eventTime] = $(this).prev().html();
-    console.log(eventOb);
-
-    // use JSON stringify to convert object to string
-    localStorage.setItem("event", JSON.stringify(eventOb));
-})
+renderTimeBlocks();
