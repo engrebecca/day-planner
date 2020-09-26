@@ -4,7 +4,7 @@ const endHour = 17;
 // Displays current date at top of planner
 $("#currentDay").text(moment().format('dddd, MMMM, Do'));
 
-// Check current time and set timeblock colors
+// Check current time and render timeblocks & respecitve coloring
 function renderTimeBlocks(){
     const currentHour = moment().hour();
     for (let hour = startHour; hour <= endHour; hour++) {
