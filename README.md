@@ -79,6 +79,7 @@ Thanks to my tutor, Wesley, for teaching me a few new concepts which allowed me 
 * Documentation for modulo operator [Free Codecamp](https://www.freecodecamp.org/news/the-python-modulo-operator-what-does-the-symbol-mean-in-python-solved/)
 * Documentation for conditional operator [Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
 * Documentation for template strings [CSS Tricks](https://css-tricks.com/template-literals/)
+* Documentation for JavaScript variables [Medium](https://medium.com/javascript-scene/javascript-es6-var-let-or-const-ba58b8dcde75)
 
 ## License
 This project is licensed under the MIT license
